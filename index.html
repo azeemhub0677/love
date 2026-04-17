@@ -1,0 +1,332 @@
+
+<style>
+  @keyframes heartbeat {
+    0%,100%{transform:scale(1)} 14%{transform:scale(1.18)} 28%{transform:scale(1)} 42%{transform:scale(1.12)} 70%{transform:scale(1)}
+  }
+  @keyframes float {
+    0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)}
+  }
+  @keyframes fadeInUp {
+    from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)}
+  }
+  @keyframes twinkle {
+    0%,100%{opacity:0.2;transform:scale(0.8)} 50%{opacity:1;transform:scale(1.3)}
+  }
+  @keyframes rise {
+    0%{transform:translateY(0) scale(0.6);opacity:0.9}
+    100%{transform:translateY(-380px) scale(0.1);opacity:0}
+  }
+  @keyframes sparkle {
+    0%,100%{opacity:0;transform:scale(0) rotate(0deg)} 50%{opacity:1;transform:scale(1) rotate(180deg)}
+  }
+  @keyframes shake {
+    0%,100%{transform:rotate(0)} 20%{transform:rotate(-6deg)} 40%{transform:rotate(6deg)} 60%{transform:rotate(-4deg)} 80%{transform:rotate(4deg)}
+  }
+  @keyframes yesGlow {
+    0%,100%{box-shadow:0 0 16px #e91e6388} 50%{box-shadow:0 0 36px #e91e63cc, 0 0 60px #ff69b466}
+  }
+  @keyframes confettiFall {
+    0%{transform:translateY(-20px) rotate(0deg);opacity:1}
+    100%{transform:translateY(420px) rotate(720deg);opacity:0}
+  }
+  @keyframes popIn {
+    0%{transform:scale(0) rotate(-10deg);opacity:0}
+    70%{transform:scale(1.1) rotate(3deg)}
+    100%{transform:scale(1) rotate(0deg);opacity:1}
+  }
+  @keyframes whatsappBounce {
+    0%,100%{transform:scale(1)} 30%{transform:scale(1.08)} 60%{transform:scale(0.96)}
+  }
+  @keyframes numberReveal {
+    0%{letter-spacing:20px;opacity:0} 100%{letter-spacing:3px;opacity:1}
+  }
+  @keyframes orbit {
+    from{transform:rotate(0deg) translateX(130px) rotate(0deg)}
+    to{transform:rotate(360deg) translateX(130px) rotate(-360deg)}
+  }
+  @keyframes orbit2 {
+    from{transform:rotate(90deg) translateX(110px) rotate(-90deg)}
+    to{transform:rotate(450deg) translateX(110px) rotate(-450deg)}
+  }
+  @keyframes orbit3 {
+    from{transform:rotate(200deg) translateX(120px) rotate(-200deg)}
+    to{transform:rotate(560deg) translateX(120px) rotate(-560deg)}
+  }
+
+  .wrap {
+    min-height: 560px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 2rem 1rem 2.5rem;
+    background: radial-gradient(ellipse at 50% 25%, #fce4ec, #f8bbd0 60%, #fce4ec 100%);
+    border-radius: 16px;
+  }
+
+  .bg-layer { position:absolute;inset:0;pointer-events:none;overflow:hidden; }
+
+  .star { position:absolute;border-radius:50%;animation:twinkle var(--d) ease-in-out infinite;animation-delay:var(--dl); }
+
+  .sp { position:absolute;clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);animation:sparkle var(--sd) ease-in-out infinite;animation-delay:var(--sdelay); }
+
+  .bubble { position:absolute;bottom:0;animation:rise var(--rd) ease-in infinite;animation-delay:var(--rdelay);opacity:0; }
+
+  .orbit-wrap { position:relative;width:300px;height:300px;display:flex;align-items:center;justify-content:center; }
+  .mini-h { position:absolute;font-size:20px;filter:drop-shadow(0 0 6px #ff69b4); }
+  .mh1{animation:orbit 5s linear infinite;}
+  .mh2{animation:orbit2 4s linear infinite;}
+  .mh3{animation:orbit3 6s linear infinite;}
+
+  .center-heart { width:130px;height:130px;animation:heartbeat 1.4s ease-in-out infinite, float 3.2s ease-in-out infinite;filter:drop-shadow(0 0 22px #ff69b4cc);z-index:2; }
+
+  .question {
+    font-size:26px;font-weight:500;color:#880e4f;text-align:center;
+    margin-top:1.2rem;
+    animation:fadeInUp 1s ease both;
+    font-family:var(--font-sans);
+    line-height:1.4;
+  }
+  .question span { color:#c2185b; }
+
+  .sub { font-size:13px;color:#ad1457;margin-top:6px;text-align:center;opacity:0.8;font-family:var(--font-sans);animation:fadeInUp 1.2s ease both;animation-delay:0.3s; }
+
+  .btn-area { position:relative;width:100%;max-width:340px;height:90px;margin-top:1.8rem;animation:fadeInUp 1.4s ease both;animation-delay:0.5s; }
+
+  .btn-yes {
+    position:absolute;left:20px;top:50%;transform:translateY(-50%);
+    background:linear-gradient(135deg,#e91e63,#c2185b);
+    color:white;border:none;border-radius:50px;
+    padding:14px 38px;font-size:17px;font-weight:500;
+    cursor:pointer;font-family:var(--font-sans);
+    animation:yesGlow 2s ease-in-out infinite;
+    transition:transform 0.15s;
+    letter-spacing:1px;
+  }
+  .btn-yes:hover { transform:translateY(-50%) scale(1.07); }
+  .btn-yes:active { transform:translateY(-50%) scale(0.97); }
+
+  .btn-no {
+  position:absolute;
+  right:20px;
+  top:50%;
+  transform:translateY(-50%);
+  
+  background:#ffffff;
+  color:#880e4f;
+  border:2px solid #e91e63;
+  
+  border-radius:50px;
+  padding:10px 26px;
+  font-size:14px;
+  
+  cursor:pointer;
+  font-family:var(--font-sans);
+  
+  transition:all 0.15s ease;
+  user-select:none;
+}
+
+.btn-no:hover {
+  background:#ffe4ec;
+  transform:translateY(-50%) scale(1.05);
+}
+
+  .yes-screen {
+    display:none;flex-direction:column;align-items:center;
+    animation:popIn 0.6s ease both;
+    text-align:center;
+  }
+  .yes-screen.show { display:flex; }
+
+  .yes-title { font-size:28px;font-weight:500;color:#880e4f;margin-bottom:4px;font-family:var(--font-sans); }
+  .yes-sub { font-size:14px;color:#c2185b;margin-bottom:1.4rem;opacity:0.85;font-family:var(--font-sans); }
+
+  .wa-card {
+    background:white;border-radius:16px;border:1.5px solid #f8bbd0;
+    padding:1.4rem 2rem;display:flex;flex-direction:column;align-items:center;gap:10px;
+    animation:whatsappBounce 2s ease-in-out infinite;
+    box-shadow:0 4px 24px #e91e6322;
+  }
+  .wa-icon { width:52px;height:52px; }
+  .wa-label { font-size:13px;color:#888;font-family:var(--font-sans); }
+  .wa-number {
+    font-size:22px;font-weight:500;color:#25D366;
+    font-family:var(--font-sans);letter-spacing:3px;
+    animation:numberReveal 1s ease both;
+  }
+  .copy-btn {
+    background:#25D366;color:white;border:none;border-radius:30px;
+    padding:9px 28px;font-size:14px;cursor:pointer;
+    font-family:var(--font-sans);font-weight:500;
+    transition:transform 0.15s,background 0.2s;
+    margin-top:4px;
+  }
+  .copy-btn:hover { background:#128C7E;transform:scale(1.05); }
+  .copy-btn:active { transform:scale(0.97); }
+  .copy-hint { font-size:12px;color:#aaa;font-family:var(--font-sans);height:16px; }
+
+  .confetti-wrap { position:absolute;inset:0;pointer-events:none;overflow:hidden; }
+  .cf { position:absolute;width:9px;height:9px;border-radius:2px;animation:confettiFall var(--cd) ease-in infinite;animation-delay:var(--cdelay);top:-20px;left:var(--cl); }
+</style>
+
+<div class="wrap" id="main">
+  <div class="bg-layer" id="bgLayer"></div>
+  <div id="confettiWrap" class="confetti-wrap" style="display:none"></div>
+
+  <div id="proposeScreen" style="display:flex;flex-direction:column;align-items:center;width:100%">
+    <div class="orbit-wrap">
+      <div class="mini-h mh1">💗</div>
+      <div class="mini-h mh2">💕</div>
+      <div class="mini-h mh3">💓</div>
+      <svg class="center-heart" viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="hg2" cx="50%" cy="38%" r="62%">
+            <stop offset="0%" stop-color="#ff8fb1"/>
+            <stop offset="55%" stop-color="#e91e63"/>
+            <stop offset="100%" stop-color="#880e4f"/>
+          </radialGradient>
+          <radialGradient id="sg2" cx="33%" cy="28%" r="30%">
+            <stop offset="0%" stop-color="#fff" stop-opacity="0.65"/>
+            <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <path d="M50 82 C50 82 5 50 5 28 C5 14 15 5 27 5 C36 5 44 10 50 18 C56 10 64 5 73 5 C85 5 95 14 95 28 C95 50 50 82 50 82Z" fill="url(#hg2)"/>
+        <path d="M50 82 C50 82 5 50 5 28 C5 14 15 5 27 5 C36 5 44 10 50 18 C56 10 64 5 73 5 C85 5 95 14 95 28 C95 50 50 82 50 82Z" fill="url(#sg2)"/>
+        <ellipse cx="31" cy="21" rx="11" ry="7" fill="white" opacity="0.22" transform="rotate(-22,31,21)"/>
+      </svg>
+    </div>
+
+    <div class="question">Will you be my<br><span>Girlfriend Forever? 💝</span></div>
+    <div class="sub">Choose wisely... my heart is waiting 🌹</div>
+
+    <div class="btn-area">
+      <button class="btn-yes" onclick="yesClicked()">💖 Yes, Always!</button>
+      <button class="btn-no" id="noBtn" onmouseover="runAway(event)" ontouchstart="runAway(event)">Nope</button>
+    </div>
+  </div>
+
+  <div class="yes-screen" id="yesScreen">
+    <div style="font-size:52px;margin-bottom:8px;animation:heartbeat 1s ease-in-out infinite">💍</div>
+    <div class="yes-title">She said YES! 🎉</div>
+    <div class="yes-sub">You've made me the happiest person alive 💕<br>Let's talk on WhatsApp!</div>
+    <div class="wa-card">
+      <svg class="wa-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="24" r="24" fill="#25D366"/>
+        <path d="M24 8C15.2 8 8 15.2 8 24c0 2.8.8 5.5 2.1 7.8L8 40l8.5-2.1C18.7 39.2 21.3 40 24 40c8.8 0 16-7.2 16-16S32.8 8 24 8zm8.1 22.4c-.3.9-1.8 1.7-2.5 1.8-.6.1-1.4.1-2.3-.2-.5-.2-1.2-.4-2-.8-3.6-1.6-5.9-5.3-6.1-5.5-.2-.3-1.5-2-.1.5-1.5 2.4 0 2.4-.2.3.7.4 1.2.1 1.7-.2.4-.9 1-1.1 1.1-.2.1-.4.2-.6.1-.3-.1-1.1-.4-2-1.3-.7-.7-1.2-1.5-1.3-1.7-.1-.2 0-.4.1-.5l.5-.5c.1-.1.2-.3.3-.4.1-.2.1-.3 0-.5-.1-.2-.9-2.1-1.2-2.9-.3-.8-.7-.7-.9-.7h-.8c-.3 0-.7.1-1 .4-.4.3-1.4 1.3-1.4 3.2s1.4 3.8 1.6 4c.2.3 2.8 4.4 6.9 6.1 4.1 1.7 4.1 1.1 4.9 1 .7-.1 2.3-.9 2.7-1.8.3-.9.3-1.6.2-1.8-.1-.2-.3-.3-.6-.4z" fill="white"/>
+      </svg>
+      <div class="wa-label">My WhatsApp Number</div>
+      <div class="wa-number" id="waNum">+91 7065334639</div>
+      <div class="copy-hint" id="copyHint"></div>
+      <button class="copy-btn" onclick="copyNumber()">📋 Copy Number</button>
+    </div>
+    <div style="margin-top:1.2rem;font-size:13px;color:#c2185b;font-family:var(--font-sans);opacity:0.8;text-align:center">
+      Every love story is beautiful,<br>but ours will be my favourite 🌸
+    </div>
+  </div>
+</div>
+
+<script>
+const bgLayer = document.getElementById('bgLayer');
+for(let i=0;i<30;i++){
+  const s=document.createElement('div');
+  s.className='star';
+  const sz=2+Math.random()*5;
+  s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${sz}px;height:${sz}px;background:hsl(${320+Math.random()*50},80%,${60+Math.random()*25}%);--d:${1.5+Math.random()*2.5}s;--dl:${Math.random()*3}s`;
+  bgLayer.appendChild(s);
+}
+for(let i=0;i<12;i++){
+  const sp=document.createElement('div');
+  sp.className='sp';
+  const ssz=5+Math.random()*7;
+  sp.style.cssText=`left:${5+Math.random()*90}%;top:${5+Math.random()*90}%;width:${ssz}px;height:${ssz}px;background:hsl(${310+Math.random()*60},75%,65%);--sd:${2+Math.random()*2}s;--sdelay:${Math.random()*4}s`;
+  bgLayer.appendChild(sp);
+}
+for(let i=0;i<12;i++){
+  const b=document.createElement('div');
+  b.className='bubble';
+  const hearts=['💗','💕','💓','💘','💖','🌸'];
+  b.textContent=hearts[Math.floor(Math.random()*hearts.length)];
+  b.style.cssText=`left:${5+Math.random()*90}%;font-size:${10+Math.random()*14}px;--rd:${3.5+Math.random()*4}s;--rdelay:${Math.random()*7}s`;
+  bgLayer.appendChild(b);
+}
+
+const noBtn = document.getElementById('noBtn');
+let noCount = 0;
+const sasses = ['Nope 😅','Run away!','Nice try! 😂','Not today!','Catch me!','No escape!','Almost... nah!'];
+
+function runAway(e) {
+  e.preventDefault();
+  noCount++;
+  noBtn.textContent = sasses[Math.min(noCount, sasses.length-1)];
+  const wrap = noBtn.parentElement;
+  const ww = wrap.offsetWidth;
+  const wh = wrap.offsetHeight;
+  const bw = noBtn.offsetWidth;
+  const bh = noBtn.offsetHeight;
+  const maxX = ww - bw;
+  const maxY = wh - bh;
+  const rx = Math.floor(Math.random() * maxX);
+  const ry = Math.floor(Math.random() * maxY);
+  noBtn.style.position = 'absolute';
+  noBtn.style.right = 'auto';
+  noBtn.style.top = ry + 'px';
+  noBtn.style.left = rx + 'px';
+  noBtn.style.transform = 'none';
+  if(noCount > 3) {
+    noBtn.style.opacity = String(Math.max(0.15, 1 - (noCount-3)*0.2));
+    noBtn.style.fontSize = Math.max(8, 14 - (noCount-3)*2) + 'px';
+    noBtn.style.padding = '8px 18px';
+  }
+}
+
+function yesClicked() {
+  document.getElementById('proposeScreen').style.display = 'none';
+  const ys = document.getElementById('yesScreen');
+  ys.classList.add('show');
+  startConfetti();
+}
+
+function startConfetti() {
+  const cw = document.getElementById('confettiWrap');
+  cw.style.display = 'block';
+  const colors = ['#e91e63','#f48fb1','#ff69b4','#ff8fb1','#c2185b','#ffb6c1','#ffd700','#ff69b4'];
+  for(let i=0;i<40;i++){
+    const cf=document.createElement('div');
+    cf.className='cf';
+    cf.style.cssText=`background:${colors[Math.floor(Math.random()*colors.length)]};--cd:${2+Math.random()*3}s;--cdelay:${Math.random()*4}s;--cl:${Math.random()*100}%;border-radius:${Math.random()>0.5?'50%':'2px'}`;
+    cw.appendChild(cf);
+  }
+}
+
+function copyNumber() {
+  const num = '+91987654321';
+  const hint = document.getElementById('copyHint');
+  if(navigator.clipboard) {
+    navigator.clipboard.writeText(num).then(()=>{
+      hint.textContent = '✅ Copied! Message me now 💕';
+      hint.style.color = '#25D366';
+    }).catch(()=>fallbackCopy(num, hint));
+  } else { fallbackCopy(num, hint); }
+}
+
+function fallbackCopy(text, hint) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.select();
+  try {
+    document.execCommand('copy');
+    hint.textContent = '✅ Copied! Message me now 💕';
+    hint.style.color = '#25D366';
+  } catch(e) {
+    hint.textContent = 'Copy: +91987654321';
+    hint.style.color = '#e91e63';
+  }
+  document.body.removeChild(ta);
+}
+</script>
